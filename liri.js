@@ -9,6 +9,7 @@ var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
 var argv2 = process.argv[2];
+var query = process.argv[3];
 
 var commandTwitter = `my-tweets`;
 var commandSpotify = `spotify-this-song`;
@@ -36,7 +37,7 @@ if (argv2 === commandTwitter){
 }
 else if (argv2 === commandSpotify){
     //SPOTIFY `spotify-this-song`
-    spotify.search({ type: 'track', query: process.argv[3], limit: 1 }, function(err, data) {
+    spotify.search({ type: 'track', query: query, limit: 1 }, function(err, data) {
         if (err) {
         return console.log('Error occurred: ' + err);
         }
@@ -48,7 +49,7 @@ else if (argv2 === commandSpotify){
     });
 }
 else if (argv2 === commandOmdb){
-    var query = process.argv[3];
+    // var query = process.argv[3];
 
     //OMDB `movie-this`
     if (query === undefined){

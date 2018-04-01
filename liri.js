@@ -61,14 +61,14 @@ else if (argv2 === commandOmdb){
         if (!error) {
             // Parse the body of the site and recover just the imdbRating
             // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-            console.log("Title: " + JSON.parse(body).Title);
-            console.log("Year Released: " + JSON.parse(body).Year);
-            console.log("IMDB rating: " + JSON.parse(body).imdbRating);
-            console.log("Rotten Tomatoes rating: " + JSON.parse(body).Ratings[1].value);
-            console.log("Country: " + JSON.parse(body).Country);
-            console.log("Language: " + JSON.parse(body).Language);
-            console.log("Plot: " + JSON.parse(body).Plot);
-            console.log("Actors: " + JSON.parse(body).Actors);
+            console.log(`Title: ${JSON.parse(body).Title}`);
+            console.log(`Year Released: ${JSON.parse(body).Year}`);
+            console.log(`IMDB rating: ${JSON.parse(body).imdbRating}`);
+            console.log(`Rotten Tomatoes rating: ${JSON.parse(body).Ratings[1].value}`);
+            console.log(`Country: ${JSON.parse(body).Country}`);
+            console.log(`Language: ${JSON.parse(body).Language}`);
+            console.log(`Plot: ${JSON.parse(body).Plot}`);
+            console.log(`Actors: ${JSON.parse(body).Actors}`);
         }
     });
 }

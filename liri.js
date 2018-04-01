@@ -17,12 +17,22 @@ var commandFs = `do-what-it-says`;
 
 if (argv2 === commandTwitter){
     //TWITTER `my-tweets`
-    client.get('favorites/list', function(error, tweets, response) {
-        if(error) throw error;
-        console.log(`${tweets[0].user.name}: ${tweets[0].text}`);
-        // console.log(tweets[0].text);  // The favorites. 
-        // console.log(response);  // Raw response object. 
-    });
+    // client.get('favorites/list', function(error, tweets, response) {
+    //     if(error) throw error;
+    //     console.log(`${tweets[0].user.name}: ${tweets[0].text}`);
+    //     // console.log(tweets[0].text);  // The favorites. 
+    //     // console.log(response);  // Raw response object. 
+    // });
+    var params = {screen_name: 'laurenfv8'};
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+        if (!error) {
+            for (var i = 0; i < tweets.length; i++){
+                console.log(`"${tweets[i].text}" created on ${tweets[i].created_at}`);
+            }
+            //console.log(tweets);
+            // console.log(`"${tweets[0].text}" created at ${tweets[0].created_at}`);
+    }
+});
 }
 else if (argv2 === commandSpotify){
     //SPOTIFY `spotify-this-song`

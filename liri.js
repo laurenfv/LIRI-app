@@ -10,6 +10,8 @@ var client = new Twitter(keys.twitter);
 
 var argv2 = process.argv[2];
 var query = process.argv[3];
+var toAppend1 = [process.argv[2]];
+var toAppend2 = [process.argv[2], process.argv[3]];
 
 var commandTwitter = `my-tweets`;
 var commandSpotify = `spotify-this-song`;
@@ -67,12 +69,30 @@ var readRandom = function() {
     });
 }
 
+var appendLog1 = function() {
+    fs.appendFile("log.txt", toAppend1 + "," + "\n", function(err) {  
+        if (err) { 
+          console.log(err); 
+        } 
+    });
+}
+
+var appendLog2 = function() {
+    fs.appendFile("log.txt", toAppend2 + "," + "\n", function(err) { 
+        if (err) { 
+          console.log(err); 
+        } 
+    });
+}
+
 if (argv2 === commandTwitter){
     twitterSearch();
+    appendLog1();
 }
 else if (argv2 === commandSpotify){
     //SPOTIFY `spotify-this-song`
     spotifySearch(query);
+    appendLog2();
 }
 else if (argv2 === commandOmdb){
     //OMDB `movie-this`
@@ -80,10 +100,13 @@ else if (argv2 === commandOmdb){
         query = "Mr. Nobody"
     }
     omdbSearch(query);
+    appendLog2();
 }
 else if (argv2 === commandFs){
     //FS RANDOM.TXT `do-what-it-says`
     readRandom();
+    appendLog1();
+
 }
 
 

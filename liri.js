@@ -16,51 +16,34 @@ var commandSpotify = `spotify-this-song`;
 var commandOmdb = `movie-this`;
 var commandFs = `do-what-it-says`;
 
-if (argv2 === commandTwitter){
-    //TWITTER `my-tweets`
-    // client.get('favorites/list', function(error, tweets, response) {
-    //     if(error) throw error;
-    //     console.log(`${tweets[0].user.name}: ${tweets[0].text}`);
-    //     // console.log(tweets[0].text);  // The favorites. 
-    //     // console.log(response);  // Raw response object. 
-    // });
+var twitterSearch = function() {
     var params = {screen_name: 'laurenfv8'};
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
             for (var i = 0; i < tweets.length; i++){
                 console.log(`"${tweets[i].text}" created on ${tweets[i].created_at}`);
             }
-            //console.log(tweets);
-            // console.log(`"${tweets[0].text}" created at ${tweets[0].created_at}`);
-    }
-});
+        }
+    });
 }
-else if (argv2 === commandSpotify){
-    //SPOTIFY `spotify-this-song`
+
+var spotifySearch = function(query) {
     spotify.search({ type: 'track', query: query, limit: 1 }, function(err, data) {
         if (err) {
         return console.log('Error occurred: ' + err);
-        }
-    
-    console.log(data.tracks.items[0].album.artists[0].name); 
-    console.log(data.tracks.items[0].name);
-    console.log(data.tracks.items[0].album.name);
-    console.log(data.tracks.items[0].external_urls.spotify);
+    }
+    console.log(`Artist: ${data.tracks.items[0].album.artists[0].name},\nSong: ${data.tracks.items[0].name},\nAlbum: ${data.tracks.items[0].album.name},\nListen: ${data.tracks.items[0].external_urls.spotify}`); 
     });
 }
-else if (argv2 === commandOmdb){
-    // var query = process.argv[3];
 
-    //OMDB `movie-this`
+var omdbSearch = function (query){
     if (query === undefined){
         query = "Mr. Nobody"
     }
     
     request("http://www.omdbapi.com/?t=" + query + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
-        // If the request is successful (i.e. if the response status code is 200)
         if (!error) {
-            // Parse the body of the site and recover just the imdbRating
-            // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+            // Parse the body of the site
             console.log(`Title: ${JSON.parse(body).Title}`);
             console.log(`Year Released: ${JSON.parse(body).Year}`);
             console.log(`IMDB rating: ${JSON.parse(body).imdbRating}`);
@@ -72,9 +55,35 @@ else if (argv2 === commandOmdb){
         }
     });
 }
-// else if (argv2 === commandFs){
-// //FS RANDOM.TXT `do-what-it-says`
-//     //TO DO: read from random.txt
-// }
+
+var readRandom = function() {
+    fs.readFile("random.txt", "utf8", function(error, data) { 
+        if (error) { 
+            return console.log(error); 
+        } 
+        var dataArr = data.split(","); 
+        var queryRead = dataArr[1];
+        spotifySearch(queryRead);
+    });
+}
+
+if (argv2 === commandTwitter){
+    twitterSearch();
+}
+else if (argv2 === commandSpotify){
+    //SPOTIFY `spotify-this-song`
+    spotifySearch(query);
+}
+else if (argv2 === commandOmdb){
+    //OMDB `movie-this`
+    if (query === undefined){
+        query = "Mr. Nobody"
+    }
+    omdbSearch(query);
+}
+else if (argv2 === commandFs){
+    //FS RANDOM.TXT `do-what-it-says`
+    readRandom();
+}
 
 

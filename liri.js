@@ -30,6 +30,9 @@ var twitterSearch = function() {
 }
 
 var spotifySearch = function(query) {
+    if (query ===  undefined){
+        return console.log("Please enter song title.");
+    }
     spotify.search({ type: 'track', query: query, limit: 1 }, function(err, data) {
         if (err) {
         return console.log('Error occurred: ' + err);
@@ -73,7 +76,7 @@ var appendLog1 = function() {
     fs.appendFile("log.txt", toAppend1 + "," + "\n", function(err) {  
         if (err) { 
           console.log(err); 
-        } 
+        }
     });
 }
 
@@ -106,7 +109,6 @@ else if (argv2 === commandFs){
     //FS RANDOM.TXT `do-what-it-says`
     readRandom();
     appendLog1();
-
 }
 
 

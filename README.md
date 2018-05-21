@@ -6,30 +6,23 @@
 ## Technologies Used
 
 - Node.js
-- Inquirer.js
 - JavaScript
-- Spotify API
-- Twitter API
-- OMDB API
+- Inquirer.js NPM Package
+- Spotify NPM Package
+- Twitter NPM Package
+- Request NPM Package
 
 ## How to Use
 
-To use clone repo and simply run:
-```
-npm install
-```
+To use clone repo and simply run: `npm install`
 
-And run
-```
-node liri.js
-```
-with any ofthe following commands:
+And the run `node liri.js` with any of the following commands:
 
-1. `node liri.js my-tweets`
+1. `my-tweets`
 
   * Displays my last 20 tweets and when they were created in terminal/bash window.
 
-2. `node liri.js spotify-this-song <song name>`
+2. `spotify-this-song <song name>`
 
   * Shows the following information about the song in terminal/bash window.
     * Artist(s)
@@ -40,7 +33,7 @@ with any ofthe following commands:
   * Or if no song is passed through, it will default to
     *"Florescent Adolescent" by Arctic Monkeys
 
-3. `node liri.js movie-this <movie name>`
+3. `movie-this <movie name>`
 
   * Shows the following information in terminal/bash.
 
@@ -56,9 +49,6 @@ with any ofthe following commands:
 
   * Or if no movie is passed through, it will default to "Mr. Nobody"
 
-4. `node liri.js do-what-it-says`
+4. `do-what-it-says`
 
   * Takes the text from random.txt and runs the song through spotify-this-song command
-
-## Features
-
